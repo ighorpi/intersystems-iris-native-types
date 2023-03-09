@@ -1,12 +1,13 @@
 export = native;
 declare namespace native {
-    export type { connectionInfo };
+    export { connectionInfo };
     export type { Connection };
     export type { Iris };
     export type { lockType };
     export type { lockMode };
     export type { Iterator };
 }
+
 declare function connectionInfo(host?: string,
     port?: number,
     ns?: string,
