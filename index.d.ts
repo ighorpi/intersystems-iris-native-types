@@ -1,6 +1,6 @@
 export = native;
 declare namespace native {
-    export type { connectionInfo };
+    export { connectionInfo };
     export type { ConnectionInfo };
     export type { Connection };
     export type { Iris };
