@@ -4,6 +4,7 @@
   "description": "InterSystems IRIS Native API for Node.js",
   "main": "index.d.ts",
   "types": "index.d.ts",
+  "type": "commonjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

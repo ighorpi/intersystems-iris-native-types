@@ -1,14 +1,15 @@
 export = native;
 declare namespace native {
-    export { connectionInfo };
-    export type { ConnectionInfo };
+    export { createConnection };
+    export type { connectionInfo };
     export type { Connection };
     export type { Iris };
     export type { lockType };
     export type { lockMode };
     export type { Iterator };
 }
-type ConnectionInfo = {
+
+type connectionInfo = {
     /**
      * - the host address
      */
@@ -32,10 +33,10 @@ type ConnectionInfo = {
     /**
      * - use shared memory if available, default is true
      */
-    sharedmemory: boolean;
+    //sharedmemory: boolean;
 };
 
-declare function connectionInfo({}: ConnectionInfo) : Connection
+declare function createConnection(params: connectionInfo) : Connection
 
 declare enum lockType {
     'S', 'E'
