@@ -16,26 +16,33 @@ nodejs lib for intersystems iris native
 #### example:
 - example in a nestjs provider/service
 ```typescript
-import { Injectable } from '@nestjs/common';
+import { Injectable, OnModuleInit } from '@nestjs/common';
 import native, { Connection, Iris } from 'intersystems-iris-native';
-const irisnative = require('intersystems-iris-native')
+import * as irisnative from 'intersystems-iris-native';
 
 @Injectable()
-export class Example {
-    private connection: Connection;
-    private iris: Iris;
+export class IrisService implements OnModuleInit {
+  private connection: Connection;
+  public iris: Iris;
 
-    private createConnectionFactory(irisnative: typeof native) {
-        return irisnative.createConnection({host: 'localhost', port: 1972, ns:'SITE',user:'example',pwd:'123456'})
-    }
-    constructor() {
-        this.connection = this.createConnectionFactory(irisnative)
-        this.iris = this.connection.createIris()
-        this.example()
-    }
-    example() {
-        console.log(this.iris.get('global', 1))
-    }
+  private createConnectionFactory(irisnative: typeof native) {
+    return irisnative.createConnection({
+      host: String(process.env.IRIS_HOST),
+      port: Number(process.env.IRIS_PORT),
+      ns: String(process.env.IRIS_NAMESPACE),
+      user: String(process.env.IRIS_USER),
+      pwd: String(process.env.IRIS_PASSWORD),
+    });
+  }
+
+  onModuleInit() {
+    this.connection = this.createConnectionFactory(irisnative);
+    this.iris = this.connection.createIris();
+  }
+
+  example() {
+    console.log(this.iris.get('global', 1))
+  }
 }
 
 ```
